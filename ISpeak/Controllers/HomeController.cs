@@ -37,25 +37,34 @@ namespace ISpeak.Controllers
                 
         }
 
-        [HttpGet]
-        public ActionResult Create() 
-        {
-        return View();
-        }
+    
         [HttpPost]
-        public ActionResult Create(string UserName, string Email,string Password) 
+        
+        public ActionResult Create(string UserName, string Email,string Password,string Description, DateTime? Date_of_birth, DateTime? DATE_OF_REGISTRATION,string gender,string Country) 
         {
             using (var Context=new DbContexts()) 
             {
+                DateTime dt = DateTime.Now;
                 Users user = new Users();
                 user.UserName=UserName;
-                user.Email=Email;
-                user.Password=Password;
+                user.Email= Email;
+                user.Password= Password;
+                user.Description= Description;
+                user.Date_of_birth= Date_of_birth.ToString();
+               
+                user.DATE_OF_REGISTRATION = dt.ToString();
+                user.gender= gender;
+                user.Country= Country;
                 Context.Users.Add(user);
-                Context.SaveChangesAsync();
-                return View();
+                Context.SaveChanges();
+                return View("Home");
             }
          
+        }
+        [HttpGet]
+        public ActionResult Home() 
+        {
+            return View();
         }
     }
 }
