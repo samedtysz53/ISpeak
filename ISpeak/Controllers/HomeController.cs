@@ -9,10 +9,19 @@ namespace ISpeak.Controllers
 {
     public class HomeController : Controller
     {
+     
+
         [HttpGet]
         public ActionResult Index()
         {
-           
+
+           using (var Context=new DbContexts()) 
+            {
+            List<Countries> countries=Context.Countries.ToList();
+                ViewBag.CountryList = new SelectList(countries, "Id", "Country");
+            }
+
+          
             return View();
         }
 
@@ -25,7 +34,7 @@ namespace ISpeak.Controllers
                 if (Query != null) 
                 {
                     Session["Email"] = Email;
-                    return View("Home");
+                    return View("friends");
                    
                 }
                 else 
@@ -56,15 +65,24 @@ namespace ISpeak.Controllers
                 user.gender= gender;
                 user.Country= Country;
                 Context.Users.Add(user);
+                Session["Eposta"] = Email;
                 Context.SaveChanges();
-                return View("Home");
+                return View("friends");
             }
          
         }
         [HttpGet]
-        public ActionResult Home() 
+        public ActionResult friends() 
         {
+            if (Session["Eposta"]==null) 
+            {
+            return View("Home/Index");
+            
+            }
             return View();
         }
+
+       
+
     }
 }

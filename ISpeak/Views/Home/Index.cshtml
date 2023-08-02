@@ -102,22 +102,10 @@
                                         <div class="form-group">
                                             <label for="Cinsiyet">Ülke:</label>
 
-                                            @{
-                                                List<SelectListItem> Country = new List<SelectListItem>
-                                                 {
-                                                 new SelectListItem { Text = "Türkiye", Value = "TR" },
-                                                 new SelectListItem { Text = "Amerika Birleşik Devletleri", Value = "US" },
-                                                 new SelectListItem { Text = "Almanya", Value = "DE" },
-                                                 new SelectListItem { Text = "Fransa", Value = "FR" },
-                                                  new SelectListItem { Text = "Birleşik Krallık", Value = "GB" },
-
-                                                  };
-                                                List<string> selectedcountry = new List<string> { "Türkiye" };
-
-                                            }
+                                            
 
 
-                                                @Html.DropDownList("Country", Country, "Ülke Seçimi", new { @class = "form-control" })
+                                            @Html.DropDownList("SelectedCountryId", (SelectList)ViewBag.CountryList, "Ülke Seçimi", new { @class = "form-control" })
                                         </div>
 
                                         <!-- Add more form fields as needed -->
@@ -139,7 +127,7 @@
                                         <div class="form-group">
                                             <label for="login-username">Username:</label>
 
-                                            @Html.PasswordFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
                                         </div>
                                         <div class="form-group">
                                             <label for="login-password">Password:</label>

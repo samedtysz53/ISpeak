@@ -14,6 +14,7 @@ namespace ISpeak.Models
         public DbSet<friends> Friends { get; set; }
         public  DbSet<Users> Users { get; set; }
         public DbSet<Messages> Messages { get; set; }
+        public DbSet<Countries> Countries { get; set; }
 
     }
 }
